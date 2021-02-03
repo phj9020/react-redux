@@ -1,17 +1,35 @@
 import { createStore } from "redux";
+import { createAction } from "@reduxjs/toolkit";
+
+
+// 2개다 function은 마찬가지 
+const addToDo = createAction("ADD");
+const deleteToDo = createAction("DELETE");
+
+const reducer = (state = [], action) => {
+    switch(action.type) {
+        case addToDo.type: 
+            return [{text: action.payload, id: Date.now()}, ...state]
+        case deleteToDo.type:
+            return state.filter(item => item.id !== action.payload)
+        default:
+            return state
+    }
+}
+
+/* without Tookkit
 
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-
- const addToDo = (text)=>{
+const addToDo = (text)=>{
     return{
         type: ADD,
         text: text
     }
 }
 
- const deleteToDo = (id)=>{
+const deleteToDo = (id)=>{
     return {
         type: DELETE,
         id : id
@@ -28,6 +46,10 @@ const reducer = (state = [], action) => {
             return state
     }
 };
+
+*/
+
+
 
 const store = createStore(reducer);
 
