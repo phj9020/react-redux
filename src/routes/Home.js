@@ -27,6 +27,7 @@ function Home({toDos, addToDo}) {
                 <button>Add</button>
             </form>
             <ul>
+                {/* toDos = [{ text: "dsfsdf", id: 123123 }] */}
                 {toDos.map(item => <ToDo {...item} key={item.id} />)}
             </ul>
         </>
